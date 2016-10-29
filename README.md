@@ -2,6 +2,7 @@
 Arch configs and stuff
 
 
+i3 file: 
 
 lock.sh
   -A lock screen for i3lock that blurs screen and puts lock icon in the center of screen
