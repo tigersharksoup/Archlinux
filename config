@@ -39,6 +39,8 @@ set_from_resource $cyan        color14 #000000
 set_from_resource $darkwhite   color7  #000000
 set_from_resource $white       color15 #000000
 
+set $back               #1d1F21
+
 
 # Use custom colors for black
  set $black       #282828
@@ -86,12 +88,22 @@ bindsym $mod+Shift+q kill
 
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu' #rolfi test
+#bindsym $mod+d exec dmenu_run -nb "#1f222d" -nf "$white" -sb "$yellow" -sf "$black" -fn "System San Francisco Display 8"
 
-
-# start rofi
+# start rofi                                doesnt work and not sure why
 #bindsym $mod+d exec rofi -show run
 #bindsym $mod+d exec --no-startup-id rofi -show run -font "FontAwesome 12" -m -1 
+#bindsym $mod+d exec 'rofi -show combi -combi-modi "window,run,ssh" -modi combi'
+#bindsym $mod+d exec --no-startup-id "rofi -combi-modi drun,run -show combi"
+#bindsym $mod+d exec rofi -show run -lines 3 -bw 1 -font "Cantarell 18" -opacity "75"
+
+# other launchers
+bindsym $mod+d exec synapse
+#bindsym $mod+d exec kupfer
+#bindsym $mod+d exec gnome-do
+
 
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -334,7 +346,8 @@ hide_edge_borders both
     #status_command i3status
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
     position bottom
-    # strip_workspace_numbers yes
+    #i3bar_command i3bar -t
+    #strip_workspace_numbers yes
     height 25
     bindsym button4 nop
     bindsym button5 nop
@@ -342,15 +355,15 @@ hide_edge_borders both
       separator $base03
       background $base01
       statusline $base05
-#                        border  background text
+#                         border  background text
       focused_workspace  $base01 $base01    $base07
       active_workspace   $base01 $base02    $base03
       inactive_workspace $base01 $base01    $base03
       urgent_workspace   $base01 $base01    $base08
     }
   }
-
   
+
   
 
 
@@ -454,3 +467,29 @@ bindsym $mod+Shift+g gaps inner all set $gapsinner gaps outer all set $gapsouter
 
 
 #for_window [class="Floating"] floating enable
+
+
+
+# run special warning script
+exec --no-startup-id sh /home/ian/.config/i3/i3scripts/i3nag.sh
+
+
+
+
+# Music control
+# Special music mode
+set $music Music (n) next, (b) prev, (p) play/pause
+mode "$music" {
+  bindsym n exec playerctl next            #--no-startup-id cmus-remote --next && pkill --signal SIGRTMIN+13 i3blocks, mode "default"
+  bindsym b exec playerctl next            # --no-startup-id cmus-remote --prev && pkill --signal SIGRTMIN+13 i3blocks, mode "default"
+  bindsym p exec playerctl play-pause           # --no-startup-id cmus-remote --pause && pkill --signal SIGRTMIN+13 i3blocks, mode "default"
+
+# back to normal
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+
+}
+# Emergency start cmus
+#bindsym $mod+Shift+Tab exec screen -S cmus -d -m cmus && pkill --signal SIGRTMIN+13 i3blocks
+bindsym $mod+Tab mode "$music"
+
