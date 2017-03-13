@@ -5,11 +5,10 @@ Arch configs and stuff
 i3 file: 
 
 lock.sh
-  -A lock screen for i3lock that blurs screen and puts lock icon in the center of screen
-  
+  -A lock screen for i3lock that blurs screen and puts lock icon in the center of screen. not made by me  
   
 interfacelift.sh
-  -downloads 10 random backgrounds of 1920x1080p resolution and puts them in ~/Pictures.
+  -downloads 10 random backgrounds of 1920x1080p resolution and puts them in ~/Pictures. not made by me
   
   
 .config/i3/config
@@ -38,3 +37,6 @@ power
 volume	
 volume.sh	
 wallpaper.sh	random wallpaper. not made by me
+
+
+How to set up my config.
