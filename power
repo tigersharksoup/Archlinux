@@ -1,0 +1,8 @@
+#!/bin/bash 
+
+case $BLOCK_BUTTON in
+  2) set $action="poweroff";;
+  3) set $action="reboot";;
+esac
+
+echo $action
